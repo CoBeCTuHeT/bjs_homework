@@ -13,9 +13,14 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
     let part = percent / (1 / 12)
     let monthlyPayment = creditBody * (part + part / (((1 + part) * months) - 1))
     console.log(monthlyPayment)
+    return monthlyPayment
 }
 
 function getGreeting(name) {
-    // код для задачи №2 писать здесь
-    // return greeting;
+    let userName = name;
+    console.log(userName)
+    if (userName == "") {
+        userName = "Аноним";
+    }
+    return `Привет, мир! Меня зовут ${userName}`
 }
