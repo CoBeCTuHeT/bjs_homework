@@ -35,69 +35,84 @@ function showSolutionsMessage(a, b, c) {
 
 // Задание 2
 
-function getAverageScore(data) {
-    let result = getAverageMark(data);
-
-    return result
+function getAverageMark(data) {
+    let result;
+    if (data.length === 0) {
+        return 0
+    } else {
+        let summ = 0;
+        let quantityData = 0;
+        for (let i = 0; i < data.length; i++) {
+            summ += data[i]
+            quantityData++;
+        }
+        result = summ / quantityData
+        console.log(result)
+        return result
+    }
 }
 
-function getAverageMark(marks) {
-    let averageScore = new Object();
-    let quantityScore = 0;
-    let summAllScore = 0;
-    for (let key in marks) {
-        let sum = 0;
-        for (let i = 0; i < marks[key].length; i++) {
-            sum += marks[key][i];
-            quantityScore++;
-            summAllScore += marks[key][i];
-            //Проверка суммы оценок
-            // console.log(sum);
+function getAverageScore(marks) {
+    console.log(marks)
+    if (Object.entries(marks).length === 0) {
+        return { average: 0 }
+    } else {
+        let averageScore = new Object();
+        averageScore["average"] = 0;
+        let quantityScore = 0;
+        let summAllScore = 0;
+        for (let key in marks) {
+            let sum = 0;
+            for (let i = 0; i < marks[key].length; i++) {
+                sum += marks[key][i];
+                //Проверка суммы оценок
+                // console.log(sum);
 
-            // Проверка значения i и длины обьекта массива marks[key]
-            // console.log(i, marks[key].length);
-            if (sum === 0) {
-                return averageScore['average'] = 0
-            }
-
-
-            if (i + 1 === marks[key].length) {
-                averageScore[key] = (sum / marks[key].length)
-                averageScore['average'] = summAllScore / quantityScore;
-                console.log(averageScore)
+                // Проверка значения i и длины обьекта массива marks[key]
+                // console.log(i, marks[key].length);
+                if (i + 1 === marks[key].length) {
+                    averageScore[key] = (sum / marks[key].length)
+                    averageScore["average"] += sum / marks[key].length;
+                }
             }
         }
+        averageScore["average"] = averageScore["average"] / Object.entries(marks).length
+        // Проверка перед выводом
+        console.log(averageScore)
+        return averageScore
     }
-    // Проверка перед выводом
-    console.log(averageScore, quantityScore, summAllScore);
-    return averageScore
 }
-
-
 // Задача 3
 
 function getPersonData(secretData) {
-    let result = getDecodedValue(secretData)
-    console.log(result)
-    return result
-}
+    console.log(secretData)
+    let names = ['Родриго', 'Эмильо'];
+    let nameSurname = new Object;
 
-function getDecodedValue(secret) {
-    let names = ['Радриго', 'Эмилио'];
-    let nameSurname  = new Object;
-
-
-    if(secret.aaa === 0) {
+    if (secretData.aaa === 0) {
         nameSurname.firstName = names[0]
-    }else if(secret.aaa === 1) {
+    } else if (secretData.aaa === 1) {
         nameSurname.firstName = names[1]
     }
 
-    if(secret.bbb === 0) {
+    if (secretData.bbb === 0) {
         nameSurname.lastName = names[0]
-    }else  if(secret.bbb === 1) {
+    } else if (secretData.bbb === 1) {
         nameSurname.lastName = names[1]
     }
-    
+    console.log(nameSurname)
     return nameSurname
 }
+
+function getDecodedValue(secret) {
+    if(secret === 0) {
+        return "Родриго"
+    }else if(secret === 1) {
+        return "Эмильо"
+    }
+}
+
+getPersonData({aaa: 1, bbb: 0})
+getPersonData({aaa: 1, bbb: 1})
+getPersonData({aaa: 0, bbb: 0})
+getPersonData({aaa: 0, bbb: 1})
